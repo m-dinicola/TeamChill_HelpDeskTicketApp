@@ -20,7 +20,15 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
             _context = context;
         }
 
+
         #region Create
+        [HttpPost]
+        public async Task<ActionResult<Hdticket>> NewTicket(Hdticket ticket)
+        {
+            _context.Hdtickets.Add(ticket);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetHdticket), new { ticketID = ticket.TicketId }, ticket);
+        }
 
         #endregion
 
@@ -32,6 +40,20 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
             return await _context.Hdtickets.ToListAsync();
         }
 
+
+        [HttpGet("{ticketID}")]
+        public async Task<ActionResult<Hdticket>> GetHdticket(int ticketID)
+        {
+            var ticket = await _context.Hdtickets.FindAsync(ticketID);
+            if(ticket is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return ticket;
+            }
+        }
         #endregion
 
         #region Update
