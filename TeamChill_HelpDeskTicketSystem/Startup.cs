@@ -2,14 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TeamChill_HelpDeskTicketSystem.Models;
 
 namespace TeamChill_HelpDeskTicketSystem
 {
     public class Startup
     {
+        public string connection = "Server=.\\SQLExpress;Database=HelpDeskDB;Trusted_Connection=True;ConnectRetryCount=0;";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +29,7 @@ namespace TeamChill_HelpDeskTicketSystem
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddDbContext<HelpDeskDBContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
