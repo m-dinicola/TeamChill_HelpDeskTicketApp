@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,11 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
 
         #region Read
         //GET: api/HDTicket
-
+        [HttpGet]
+        public async Task<List<Hdticket>> GetHdtickets()
+        {
+            return await _context.Hdtickets.ToListAsync();
+        }
 
         #endregion
 
