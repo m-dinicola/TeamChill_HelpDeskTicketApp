@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeamChill_HelpDeskTicketSystem.Models;
 
+
 namespace TeamChill_HelpDeskTicketSystem.Controllers
 {
     [Route("api/[controller]")]
@@ -20,6 +21,11 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
 
 
         #region Create
+        //POST: api/Bookmark/{userEmail}/{ticket}
+        //writes a bookmark
+
+        [HttpPost]
+        public async Task<ActionResult<Bookmark>> AddBookmark()
 
         #endregion
 
@@ -38,7 +44,9 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
         #region Update
         //PATCH: api/Bookmark/{userEmail}/{ticket}
         //toggles bookmark
-
+        //Decided not to use this method since toggling like this does not
+        //use an idempotent method and could lead to a fragile API
+        //while our solution is not totally idempotent (POST and DELETE), it's better than a toggle.
 
         #endregion
 
