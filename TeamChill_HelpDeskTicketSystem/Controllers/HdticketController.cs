@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TeamChill_HelpDeskTicketSystem.Models;
+using System.Text.Json;
 
 namespace TeamChill_HelpDeskTicketSystem.Controllers
 {
@@ -55,13 +56,29 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
             }
         }
         #endregion
-
+      
         #region Update
+        [HttpPatch("{ticket}")]
+
+        public async Task<ActionResult> CompleteHdtickets(int ticket, bool complete)
+        {
+            var patchedTicket = await _context.Hdtickets.FindAsync(ticket);
+            if (patchedTicket is null)
+            {
+                return NotFound();
+            }
+
+            patchedTicket.Complete = complete;
+            _context.Entry(patchedTicket).State = EntityState.Modified;
+            _context.Update(patchedTicket);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
 
         #endregion
 
         #region Delete
-
+        
         #endregion
 
     }
