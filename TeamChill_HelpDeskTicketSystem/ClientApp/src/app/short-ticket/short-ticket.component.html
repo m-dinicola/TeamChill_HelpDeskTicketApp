@@ -1,0 +1,2 @@
+<p>{{ticket.userEmail}} submitted a ticket titled "{{ticket.title}}" at {{ticket.openDateTime | date:'h:mm a'}} on {{ticket.openDateTime | date:'MM/dd/yyyy'}}.
+  <button [routerLink]="['/helpdesk',ticket.ticketId]">Details</button></p>

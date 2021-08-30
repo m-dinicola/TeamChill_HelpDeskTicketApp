@@ -10,7 +10,7 @@ import { Logger } from '../services/logger.service';
   providers: [Logger, CommentService]
 })
 export class CommentsComponent implements OnInit {
-  @Input() ticket;
+  @Input() ticket:number;
   comments:Comment[];
   constructor(private logger:Logger, private commentService:CommentService, private route:ActivatedRoute) { }
 

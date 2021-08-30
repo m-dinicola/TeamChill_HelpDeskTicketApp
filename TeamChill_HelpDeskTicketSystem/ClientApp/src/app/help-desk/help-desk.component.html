@@ -1,6 +1,5 @@
 <div *ngFor="let t of tickets">
-  <p>{{t.userEmail}} submitted a ticket titled "{{t.title}}" at {{t.openDateTime | date:'h:mm a'}} on {{t.openDateTime | date:'MM/dd/yyyy'}}.   
-  <button [routerLink]="['/helpdesk',t.ticketId]">Details</button></p>
+  <app-short-ticket [ticket]="t"></app-short-ticket>
 <br>
 <br>
 </div>

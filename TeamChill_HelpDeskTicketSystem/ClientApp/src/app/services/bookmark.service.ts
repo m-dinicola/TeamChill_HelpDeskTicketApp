@@ -13,8 +13,8 @@ export class BookmarkService {
     return this.http.get<Bookmark[]>(`https://localhost:5001/api/Bookmark/${user}`);
   }
 
-  setBookmark(user:string,ticket:number): Observable<Object>{
-    return this.http.post(`https://localhost:5001/api/Bookmark/${user}`,ticket);
+  setBookmark(user:string,ticketId:number): Observable<Bookmark>{
+    return this.http.post<Bookmark>(`https://localhost:5001/api/Bookmark/${user}`,{ ticket: ticketId});
   }
 
   removeBookmark(user:string,ticket:number): Observable<Object>{

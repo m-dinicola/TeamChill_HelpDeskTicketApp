@@ -1,1 +1,4 @@
-<p>bookmarks works!</p>
+<div *ngFor="let b of bookmarks">
+  <app-short-ticket [ticket]="b.ticketId"></app-short-ticket><app-bookmark-toggle [user]="user" [ticket]="b.ticketId"></app-bookmark-toggle>
+  <hr>
+</div>

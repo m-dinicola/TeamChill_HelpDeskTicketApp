@@ -21,7 +21,7 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
 
 
         #region Create
-        //POST: api/Bookmark/{userEmail}/{ticket}
+        //POST: api/Bookmark/{userEmail}
         //writes a bookmark
 
         [HttpPost("{userEmail}")]
@@ -37,7 +37,7 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
                 return BadRequest($"No such ticket found.");
             }
 
-            if (_context.Bookmarks.Count() == 0 || _context.Bookmarks.First(x => x.UserEmail == userEmail && x.TicketId == ticket) is null)
+            if (_context.Bookmarks.Count() == 0 || _context.Bookmarks.Where(x => x.UserEmail == userEmail && x.TicketId == ticket).Count() == 0)
             {
                 _context.Bookmarks.Add(bookmark);
                 await _context.SaveChangesAsync();

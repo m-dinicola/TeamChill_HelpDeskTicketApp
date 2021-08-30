@@ -26,7 +26,7 @@ export class HelpDeskComponent implements OnInit {
     }
   }
 
-  getFormatedDate(dateString: string, format:string){
+  getFormattedDate(dateString: string, format:string){
     const datePipe = new DatePipe('en-US');
     return datePipe.transform(new Date(dateString), format);
   }
