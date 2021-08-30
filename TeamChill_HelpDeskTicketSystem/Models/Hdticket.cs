@@ -23,9 +23,9 @@ namespace TeamChill_HelpDeskTicketSystem.Models
         public string UserEmail { get; set; }
 
         public virtual UserTable UserEmailNavigation { get; set; }
-        [JsonIgnore]
+        [JsonIgnore] //this was creating a looping reference within bookmarks, so the serializer will now ignore this
         public virtual ICollection<Bookmark> Bookmarks { get; set; }
-        [JsonIgnore]
+        [JsonIgnore] //this was creating a looping reference within comments
         public virtual ICollection<Hdcomment> Hdcomments { get; set; }
     }
 }
