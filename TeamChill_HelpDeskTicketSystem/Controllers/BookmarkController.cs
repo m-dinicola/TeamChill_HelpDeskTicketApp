@@ -24,7 +24,7 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
         //POST: api/Bookmark/{userEmail}/{ticket}
         //writes a bookmark
 
-        [HttpPost("{userEmail}/{ticket}")]
+        [HttpPost("{userEmail}")]
         public async Task<ActionResult<Bookmark>> AddBookmark(string userEmail, int ticket)
         {
             Bookmark bookmark = new Bookmark
@@ -37,7 +37,7 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
                 return BadRequest($"No such ticket found.");
             }
 
-            if (_context.Bookmarks.First(x => x.UserEmail == userEmail && x.TicketId == ticket) is null)
+            if (_context.Bookmarks.Count() == 0 || _context.Bookmarks.First(x => x.UserEmail == userEmail && x.TicketId == ticket) is null)
             {
                 _context.Bookmarks.Add(bookmark);
                 await _context.SaveChangesAsync();
