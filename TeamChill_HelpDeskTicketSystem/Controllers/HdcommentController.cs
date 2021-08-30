@@ -50,7 +50,7 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
             }
             else
             {
-                return await _context.Hdcomments.Where(x => x.TicketId == ticket).ToListAsync(); 
+                return _context.Hdcomments.Where(x => x.TicketId == ticket).ToList(); 
             }
         }
 

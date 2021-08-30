@@ -27,9 +27,11 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
         [HttpPost("{userEmail}/{ticket}")]
         public async Task<ActionResult<Bookmark>> AddBookmark(string userEmail, int ticket)
         {
-            Bookmark bookmark = new Bookmark();
-            bookmark.TicketId = ticket;
-            bookmark.UserEmail = userEmail;
+            Bookmark bookmark = new Bookmark
+            {
+                TicketId = ticket,
+                UserEmail = userEmail
+            };
             if (await _context.Hdtickets.FindAsync(ticket) is null)
             {
                 return BadRequest($"No such ticket found.");
@@ -53,8 +55,7 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
         [HttpGet("{userEmail}")]
         public List<Hdticket> GetBookmarkedTickets(string userEmail) 
         {
-            IEnumerable<int> tickets = _context.Bookmarks.Where(x => x.UserEmail.ToLower() == userEmail.ToLower()).Select(y=>y.TicketId);
-            return _context.Hdtickets.Where(x => tickets.Contains(x.TicketId)).ToList();
+            return _context.Bookmarks.Where(x => x.UserEmail.ToLower() == userEmail.ToLower()).Select(y=>y.Ticket).ToList();
         }
 
         #endregion
@@ -69,8 +70,30 @@ namespace TeamChill_HelpDeskTicketSystem.Controllers
         #endregion
 
         #region Delete
+        //DELETE: api/Bookmark/{userEmail}/{ticket}
+
+        [HttpDelete("{userEmail}/{ticket}")]
+        public async Task<ActionResult> DeleteBookmark(string userEmail, int ticket)
+        {
+            List<Bookmark> toBeDeleted = FindBookmark(userEmail, ticket);
+            if (toBeDeleted.Count > 0)
+            {
+                foreach (Bookmark b in toBeDeleted)
+                {
+                    _context.Bookmarks.Remove(b);
+                }
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            return NotFound();
+        }
 
         #endregion
 
+
+        public List<Bookmark> FindBookmark(string userEmail, int ticket)
+        {
+            return _context.Bookmarks.Where(x => x.TicketId == ticket && x.UserEmail == userEmail).ToList();
+        }
     }
 }

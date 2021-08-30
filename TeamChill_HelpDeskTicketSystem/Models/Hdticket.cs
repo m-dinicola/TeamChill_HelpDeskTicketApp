@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -22,7 +23,9 @@ namespace TeamChill_HelpDeskTicketSystem.Models
         public string UserEmail { get; set; }
 
         public virtual UserTable UserEmailNavigation { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Bookmark> Bookmarks { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Hdcomment> Hdcomments { get; set; }
     }
 }
