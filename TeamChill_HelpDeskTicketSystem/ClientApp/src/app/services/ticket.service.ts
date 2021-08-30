@@ -23,7 +23,7 @@ export class TicketService {
     return this.http.get<Ticket[]>("https://localhost:5001/api/HDTicket");
   }
 
-  getTicketById(id:number):Ticket{
-    return this.tickets[id];
+  getTicketById(id:number):Observable<Ticket>{
+    return this.http.get<Ticket>(`https://localhost:5001/api/hdticket/${id}`);
   }
 }

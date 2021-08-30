@@ -12,6 +12,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HelpDeskComponent } from './help-desk/help-desk.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentsComponent } from './comments/comments.component';
+import { BookmarksComponent } from './bookmarks/bookmarks.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'helpdesk', pathMatch: 'full' },
@@ -20,7 +23,7 @@ const appRoutes: Routes = [
   { path: 'helpdesk', component: HelpDeskComponent },
   { path: 'helpdesk/:id', component: TicketComponent},
   //{ path: 'helpdesk/bookmarks/:user', component: BookmarksComponent},
-  //{ path: 'helpdesk/comment/:ticket', component: CommentComponent},
+  { path: 'helpdesk/comment/:ticket', component: CommentComponent},
   //{ path: '**', component: PageNotFoundComponent}
 ]
 
@@ -34,7 +37,10 @@ const appRoutes: Routes = [
     FetchDataComponent,
     HelpDeskComponent,
     TicketComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    CommentComponent,
+    CommentsComponent,
+    BookmarksComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

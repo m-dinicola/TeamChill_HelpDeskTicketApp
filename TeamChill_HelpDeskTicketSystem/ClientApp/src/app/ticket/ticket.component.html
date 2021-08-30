@@ -1,1 +1,3 @@
-<p>ticket works!</p>
+<H1>{{ticket.title}}</H1>
+<h2>Initiated by: {{ticket.userEmail}}</h2>
+<app-comments [ticket]="ticket.ticketId"></app-comments>
